@@ -29,7 +29,7 @@
     // access property
     const firstNamePerson = person.firstName; // way 1
     const statusCode = person['status-code']; // way 2
-    const {lastName : lastNamePerson} = person;
+    const {lastName : lastNamePerson} = person; //way 3
 
     let cars = {};
     for (const key in person){
@@ -40,6 +40,9 @@
       } 
     }
     console.log("cars: ", cars);
+    for (const value of Object.values(person)){
+      console.log('for ... value', value);
+    }
   </script>
 </body>
 </html>
