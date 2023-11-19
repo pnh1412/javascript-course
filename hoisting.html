@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>hoisting</title>
+</head>
+<body>
+
+  <h3>hoisting</h3>
+
+  <script type="text/javascript">
+    /* hoisting
+    - var, function is hoisting
+    - allow accept before initialize
+    - auto push var or function on top file
+    */
+
+    // global variable
+    var number;
+    const firstName = 'tony';
+    let lastName = 'nguyen';
+
+
+    function getNumber(){
+      console.log('getNumber')
+    }
+
+    console.log('before number: ', number)
+    number = 2;
+    console.log('after number: ', number)
+
+
+    getNumber()
+    function getNumber(){
+      var age= 18; // local variable
+      console.log('getNumber')
+    }
+
+    
+    
+
+   
+  </script></body>
+</html>

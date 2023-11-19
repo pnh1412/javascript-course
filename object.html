@@ -8,6 +8,24 @@
   <h3>object</h3>
 
   <script type="text/javascript">
+    const person = {
+      firstName: 'tony',
+      lastName: 'nguyen',
+      age: 18,
+      email: 'tony@gmail.com',
+      city: 'HCM',
+      country: 'VN',
+      'status-code': 200,
+      'author-name': 'minh',
+      'vertex coordinate': 'xy',
+      getFullName: function() { // tranditional
+        console.log('traditional function: ', this)
+      },
+      getAge: () => { // arrow no this
+        console.log('arrow function: ', this)
+      }
+    }
+
     // compare value
     const firstName = 'John';
     const lastName = 'Doe';
@@ -22,9 +40,34 @@
       s2: objectA === objectC
     });
 
-    
+    // access property
+    // const firstNamePerson = person.firstName; // way 1
+    // const firstNamePerson = person['firstName']; // way 2
+    const { firstName: firstNamePerson } = person; // way 3 (destructuring)
+    const statusCode = person['status-code'];
+    const vertex = person['vertex coordinate'];
+    person.getFullName();
+    person.getAge();
 
+    // loop object
+    // for ... in
+    let cars = {};
+    for (const key in person) {
+      console.log('for ... in: ', key);
+      cars[key] = {
+        id: Date.now(),
+        [key]: person[key]
+      }
+      // cars[key] = cars['firstName'] // cars = { firstName: { id: 2323, firstName: tony } }
+    }
+    console.log("cars: ", cars);
 
+    /*
+      Use: in operator
+      Check exist property.
+      Return boolean
+    */
+    console.log(' in operator: ', "firstName" in person)
 
   </script>
 

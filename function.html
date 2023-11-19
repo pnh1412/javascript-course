@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>hoisting</title>
+</head>
+<body>
+
+  <h3>function</h3>
+
+  <script type="text/javascript">
+    // type: success, info, warning, pending, error
+    function showMessage(message, title, isOpen, type = 'error') {
+      const data = {
+        type,
+        message,
+        isOpen,
+        title
+      }
+      console.log(data);
+    }
+    showMessage('Updated', 'Todo', true)
+
+    // pass parameter as 1 object
+    function showMessageObj({ type = 'info', isOpen, title, message }) {
+      const data = {
+        type,
+        message,
+        isOpen,
+        title
+      }
+      console.log(data)
+    }
+    showMessageObj({
+      message: 'Delete success',
+      isOpen: true,
+      title: 'Warning'
+    })
+   
+  </script>
+  </body>
+</html>
