@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h3>Object</h3>
+  <script>
+    const person = {
+      firstName: 'tony',
+      lastName: 'nguyen',
+      age: 18,
+      email: 'tony@gmail.com',
+      city: 'HCM',
+      country: 'VN',
+      'status-code': 200,
+      'author-name': 'minh',
+      'vertex coordinate': 'xy',
+      getFullName: function() { // tranditional
+        console.log('traditional function: ', this)
+      },
+      getAge: () => { // arrow no this
+        console.log('arrow function: ', this)
+      }
+    }
+    
+    // access property
+    const firstNamePerson = person.firstName; // way 1
+    const statusCode = person['status-code']; // way 2
+    const {lastName : lastNamePerson} = person;
+
+    let cars = {};
+    for (const key in person){
+      console.log('for ... in :', key);
+      cars[key] = {
+        id: Date.now(),
+        [key]: person[key]
+      } 
+    }
+    console.log("cars: ", cars);
+  </script>
+</body>
+</html>
