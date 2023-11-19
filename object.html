@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>object</title>
+</head>
+<body>
+
+  <h3>object</h3>
+
+  <script type="text/javascript">
+    // compare value
+    const firstName = 'John';
+    const lastName = 'Doe';
+    console.log("compare value: ", firstName === lastName); // false
+
+    // compare reference: so sánh các vùng nhớ vs nhau
+    const objectA = {}; // memory A
+    const objectB = objectA; //  memory A
+    const objectC = {}; // memory X
+    console.log("compare reference: ", {
+      s1: objectA === objectB,
+      s2: objectA === objectC
+    });
+
+    
+
+
+
+  </script>
+
+</body>
+</html>

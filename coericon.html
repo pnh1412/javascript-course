@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>coericon</title>
+</head>
+<body>
+
+  <h3>coericon</h3>
+
+  <script type="text/javascript">
+    /*
+      - convert to another string
+        - String -> String(id)
+        - toString -> id.toString()
+      - convert to boolean
+        - Boolean
+      - convert to number
+        - Number
+        - parseInt
+        - parseFloat
+     
+      WHEN:
+       - when comparision with == (JS force coericon)
+       - manual coericon 
+    */
+    
+    // manual coericon
+    const idBE = '123';
+    const todos = [
+      { id: 123, title: 'Buy Milk' },
+      { id: 456, title: 'Buy Bread' },
+      { id: 789, title: 'Buy Butter' }
+    ]
+    // check type: typeof ...
+    console.log("check type value: ", typeof idBE);
+    const todoItem = todos.find(item => item.id === Number(idBE)); // yes: return item in aray (obj); no: return undefined
+    console.log("manual coericon: ", todoItem);
+
+
+  </script>
+
+</body>
+</html>
