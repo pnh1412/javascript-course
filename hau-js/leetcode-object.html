@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>object</title>
+</head>
+
+<body>
+
+  <h3>Leet code object</h3>
+
+  <script type="text/javascript">
+    /* counting instances of values in an object
+    const input = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice']
+    output: { 'Alice': 2, 'Bob': 1, 'Tiff': 1, 'Bruce': 1 }
+    */
+    const input = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice']
+    function countOccurrences(arr) {
+    // tạo cái mãng rỗng để lưu trữ
+    const result = {};
+    // lặp wa từng phần tử trong mảng
+    arr.forEach(element => {
+      // nếu mà phần tử dẵ xuất hiện ở trong mảng result r thì tăng lên 1
+        if (result[element]) {
+            result[element] += 1;
+        } else {
+          // nếu chưa thì gán chỉ mới xuất hiện 1 lần
+            result[element] = 1;
+        }
+    });
+    return result;
+}
+console.log(countOccurrences(input));
+
+
+    /* group object
+      const dataNotification = [
+        {
+          "email":      "email@example.com",
+          "first_name": "Tony",
+          "last_name":  "Nguyen",
+          "group":   "Billing", // | "Collaboration" | "Simulation", 
+          "type":    "warning", // "info" | "warning" | "alert" | "success",
+        },
+        {
+          "email":      "email@example.com",
+          "first_name": "John",
+          "last_name":  "Doe",
+          "group":   "Collaboration", // | "Collaboration" | "Simulation", 
+          "type":    "info", // "info" | "warning" | "alert" | "success",
+        },
+        {
+          "email":      "email@example.com",
+          "first_name": "Thang",
+          "last_name":  "Doe",
+          // String - define how to group notifications in stack
+          "group":   "Simulation", // | "Collaboration" | "Simulation", 
+          "type":    "warning", // "info" | "warning" | "alert" | "success",
+        },
+        {
+          "email":      "email@example.com",
+          "first_name": "Stefan",
+          "last_name":  "Doe",
+          "createdAt": "2020-06-24T07:51:48.659Z",
+          "group":   "Billing", // | "Collaboration" | "Simulation", 
+          "type":    "alert", // "info" | "warning" | "alert" | "success",
+        },
+      ];
+      
+  
+      output = {
+        "Billing": [
+           {
+            "email":      "email@example.com",
+            "first_name": "Tony",
+            "last_name":  "Nguyen",
+            "group":   "Billing", // | "Collaboration" | "Simulation", 
+            "type":    "warning", // "info" | "warning" | "alert" | "success",
+          },
+          {
+            "email":      "email@example.com",
+            "first_name": "Stefan",
+            "last_name":  "Doe",
+            "createdAt": "2020-06-24T07:51:48.659Z",
+            "group":   "Billing", // | "Collaboration" | "Simulation", 
+            "type":    "alert", // "info" | "warning" | "alert" | "success",
+          },
+        ],
+        "Simulation": [ .... ],
+        "Collaboration" : [...]
+  
+      }
+    */
+    const dataNotification = [
+  {
+    "email": "email@example.com",
+    "first_name": "Tony",
+    "last_name": "Nguyen",
+    "group": "Billing",
+    "type": "warning",
+  },
+  {
+    "email": "email@example.com",
+    "first_name": "John",
+    "last_name": "Doe",
+    "group": "Collaboration",
+    "type": "info",
+  },
+  {
+    "email": "email@example.com",
+    "first_name": "Thang",
+    "last_name": "Doe",
+    "group": "Simulation",
+    "type": "warning",
+  },
+  {
+    "email": "email@example.com",
+    "first_name": "Stefan",
+    "last_name": "Doe",
+    "createdAt": "2020-06-24T07:51:48.659Z",
+    "group": "Billing",
+    "type": "alert",
+  },
+];
+
+let groups = {};
+// lặp wa từng value của dataNotification
+for (const notification of dataNotification) {
+  // groupName sẽ = Billing, Simulation, Collaboration
+  const groupName = notification.group;
+  // nếu groups chưa có tương ứng như groupName thì add zo
+  if (!groups[groupName]) {
+    groups[groupName] = [];
+    console.log(groups[groupName]);
+  }
+  console.log(notification);
+  groups[groupName].push(notification);
+}
+
+console.log(groups);
+  </script>
+
+</body>
+
+</html>

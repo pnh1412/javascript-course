@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>object</title>
+</head>
+
+<body>
+
+  <h3>Leet code array</h3>
+
+  <script type="text/javascript">
+    /* splice
+      1/ Remove 0 (zero) elements before index 2, and insert "drum"
+      const myFish = ['angel', 'clown', 'mandarin', 'sturgeon']
+      // output: ["angel", "clown", "drum", "mandarin", "sturgeon"]
+
+      2/ Remove 1 element at index 3
+      const myFish = ['angel', 'clown', 'drum', 'mandarin', 'sturgeon']
+      // output:  ["angel", "clown", "drum", "sturgeon"]
+
+      3/ Remove 1 element at index 2, and insert "trumpet"
+      const myFish = ['angel', 'clown', 'drum', 'sturgeon']
+      // output: ["angel", "clown", "trumpet", "sturgeon"]
+    */
+
+    /* indexOf()
+
+      1/ Finding all the occurrences of an element
+      const array = ['a', 'b', 'a', 'c', 'a', 'd'];
+      const element = ‘a’
+      // output: [0, 2, 4]
+
+      2/ Finding if an element exists in the array or not and updating the array
+      const veggies = ['potato', 'tomato', 'chillies', 'green-pepper'];
+      const element = [‘spinner’]
+      // output:  if veggies doesn’t has element ->  ['potato', 'tomato', 'chillies', 'green-pepper', ‘‘spinner’];
+      // output:  if veggies has an element -> ‘spinner’ already exists in the veggies collection.
+    */
+
+    /* map()
+      1/ Using map to reformat objects in an array
+
+      const input = [
+        {key: 1, value: 10},
+        {key: 2, value: 20},
+        {key: 3, value: 30}
+      ]
+      // output:  [{1: 10}, {2: 20}, {3: 30}]
+    */
+
+
+    /* splice
+      1/ Remove 0 (zero) elements before index 2, and insert "drum"
+      const myFish = ['angel', 'clown', 'mandarin', 'sturgeon']
+      // output: ["angel", "clown", "drum", "mandarin", "sturgeon"]
+      */
+    //splice bai 1
+    const myFish = ['angel', 'clown', 'mandarin', 'sturgeon']
+    const indexToAdd = 2;
+    const elementToAdd = 'drum';
+    myFish.splice(indexToAdd, 0, elementToAdd);
+    console.log(myFish);
+
+    // 2/ Remove 1 element at index 3
+    //   const myFish = ['angel', 'clown', 'drum', 'mandarin', 'sturgeon']
+    //   // output:  ["angel", "clown", "drum", "sturgeon"]
+    const myFishB = ['angel', 'clown', 'drum', 'mandarin', 'sturgeon']
+    console.log(myFishB.splice(3, 1));
+    console.log(myFishB);
+
+    // 3/ Remove 1 element at index 2, and insert "trumpet"
+    //   const myFish = ['angel', 'clown', 'drum', 'sturgeon']
+    //   // output: ["angel", "clown", "trumpet", "sturgeon"]
+    const myFishC = ['angel', 'clown', 'drum', 'sturgeon'];
+    myFishC.splice(2, 1);
+    myFishC.splice(2, 0, 'trumpet');
+    console.log(myFishC);
+
+
+    // 1/ Finding all the occurrences of an element
+    //   const array = ['a', 'b', 'a', 'c', 'a', 'd'];
+    //   const element = ‘a’
+    //   // output: [0, 2, 4]
+    // tạo mảng để lưu lại các chỉ mục của a
+    const tmp = [];
+    const array = ["a", "b", "a", "c", "a", "d"];
+    const element = "a";
+    // chỉ mục vào thằng a nếu k có sẽ trả về -1 
+    // ở đây lúc này checkElement sẽ là 0 sau đó sẽ được tăng lên trong vòng lặp
+    let checkElement = array.indexOf(element);
+    // nếu mà khác chỉ mục thì thêm vào mảng đã tạo
+    while (checkElement !== -1) {
+      tmp.push(checkElement);
+      // sau khi check ở vị trí 0 trong mảng tăng lên +1 để check tiếp
+      checkElement = array.indexOf(element, checkElement + 1);
+    }
+    console.log(tmp);
+
+
+    // 2/ Finding if an element exists in the array or not and updating the array
+    //   const veggies = ['potato', 'tomato', 'chillies', 'green-pepper'];
+    //   const element = [‘spinner’]
+    //   // output:  if veggies doesn’t has element ->  ['potato', 'tomato', 'chillies', 'green-pepper', ‘‘spinner’];
+    //   // output:  if veggies has an element -> ‘spinner’ already exists in the veggies collection.
+    const veggies = ['potato', 'tomato', 'chillies', 'green-pepper'];
+    const addElement = 'spinner';
+    if (veggies.length === 0) {
+      veggies.push('potato', 'tomato', 'chillies', 'green-pepper', 'spinner');
+    } else {
+      veggies.push(addElement);
+    }
+    console.log(veggies);
+
+    /* map()
+     1/ Using map to reformat objects in an array
+
+     const input = [
+       {key: 1, value: 10},
+       {key: 2, value: 20},
+       {key: 3, value: 30}
+     ]
+     // output:  [{1: 10}, {2: 20}, {3: 30}]
+   */
+
+    const input = [
+      { key: 1, value: 10 },
+      { key: 2, value: 20 },
+      { key: 3, value: 30 }
+    ];
+
+    const output = input.map(obj => {
+      const newObj = {};
+      newObj[obj.key] = obj.value;
+      return newObj;
+    });
+
+    console.log(output);
+
+  </script>
+
+</body>
+
+</html>
