@@ -16,21 +16,21 @@
     */
     const input = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice']
     function countOccurrences(arr) {
-    // tạo cái mãng rỗng để lưu trữ
-    const result = {};
-    // lặp wa từng phần tử trong mảng
-    arr.forEach(element => {
-      // nếu mà phần tử dẵ xuất hiện ở trong mảng result r thì tăng lên 1
-        if (result[element]) {
-            result[element] += 1;
-        } else {
-          // nếu chưa thì gán chỉ mới xuất hiện 1 lần
-            result[element] = 1;
-        }
-    });
-    return result;
-}
-console.log(countOccurrences(input));
+        // tạo cái mãng rỗng để lưu trữ
+        const result = {};
+        // lặp wa từng phần tử trong mảng
+        arr.forEach(element => {
+          // nếu mà phần tử dẵ xuất hiện ở trong mảng result r thì tăng lên 1
+            if (result[element]) {
+                result[element] += 1;
+            } else {
+              // nếu chưa thì gán chỉ mới xuất hiện 1 lần
+                result[element] = 1;
+            }
+        });
+        return result;
+    }
+    console.log(countOccurrences(input));
 
 
     /* group object

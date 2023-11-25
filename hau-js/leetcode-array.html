@@ -73,8 +73,7 @@
     //   const myFish = ['angel', 'clown', 'drum', 'sturgeon']
     //   // output: ["angel", "clown", "trumpet", "sturgeon"]
     const myFishC = ['angel', 'clown', 'drum', 'sturgeon'];
-    myFishC.splice(2, 1);
-    myFishC.splice(2, 0, 'trumpet');
+    myFishC.splice(2, 1, "trumpet");
     console.log(myFishC);
 
 
@@ -122,6 +121,11 @@
      ]
      // output:  [{1: 10}, {2: 20}, {3: 30}]
    */
+    // number: [1,2,3,4,5]
+    // new number: [2,4,6,8]
+    const out = number.map((item) => {
+      return item * 2
+    })
 
     const input = [
       { key: 1, value: 10 },
