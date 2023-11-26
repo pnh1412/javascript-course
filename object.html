@@ -5,9 +5,14 @@
 </head>
 <body>
 
-  <h3>object</h3>
+  <h3>Object</h3>
+  <div id="objectContainer">
+    FirstName: tony <br />
+    LastName: nguyen <br />
+  </div>
 
   <script type="text/javascript">
+    const objectContainer = document.getElementById('objectContainer');
     const person = {
       firstName: 'tony',
       lastName: 'nguyen',
@@ -42,7 +47,9 @@
 
     // access property
     // const firstNamePerson = person.firstName; // way 1
+    // delete person.firstName // delete  
     // const firstNamePerson = person['firstName']; // way 2
+    // delete person['firstName'] // delete  
     const { firstName: firstNamePerson } = person; // way 3 (destructuring)
     const statusCode = person['status-code'];
     const vertex = person['vertex coordinate'];
@@ -56,11 +63,35 @@
       console.log('for ... in: ', key);
       cars[key] = {
         id: Date.now(),
-        [key]: person[key]
+        [key]: person[key],
+        value: person[key]
       }
       // cars[key] = cars['firstName'] // cars = { firstName: { id: 2323, firstName: tony } }
     }
     console.log("cars: ", cars);
+
+    // convert object to array
+    const objectValue = Object.values(cars); // Object.values()
+    console.log('Object.value(): ', objectValue)
+
+    // objectValue.forEach(item => {
+    //   objectContainer.textContent += `
+    //     ${item.value}, 
+    //   `
+    // })
+
+    // convert object to array
+    const objectKey = Object.keys(cars); // Object.keys()
+    console.log('Object.keys(): ', objectKey)
+    objectKey.forEach(key => {
+      objectContainer.textContent += `
+        ${cars[key][key]}: ${cars[key].value} 
+      `
+    })
+
+    // convert object to array
+    const objectEntries = Object.entries(cars); // Object.entries()
+    console.log('Object.entries(): ', objectEntries)
 
     /*
       Use: in operator
@@ -68,6 +99,53 @@
       Return boolean
     */
     console.log(' in operator: ', "firstName" in person)
+
+    // ordered
+    const codes =  {
+      "+49": 'GER',
+      "+41": 'SWIT',
+      "+1": 'USA'
+    }
+
+    console.log('ordered: ', Object.keys(codes));
+
+    /* copy object
+      - Use the spread (...) syntax
+      - Use the Object.assign() method
+      - Use the JSON.stringify() and JSON.parse() methods
+      - Properties in the target object are overwritten by properties in the sources if they have the same key. Later sources' properties overwrite earlier ones.
+
+
+    */
+    const objectNumA = {
+      a: 1,
+      b: 1
+    }
+    const objectNumB = {
+      c: 2,
+      b: 'tony'
+    }
+    // const shallowCopyObjectWay1 = Object.assign({}, objectNumbA, objectNumB}; // es5
+    const shallowCopyObjectWay1 = {...objectNumB, ...objectNumA  }; // es6
+    console.log('shallowCopyObjectWay1: ', shallowCopyObjectWay1)
+
+    /* Summary
+
+      They store properties (key-value pairs), where:
+      Property keys must be strings or symbols (usually strings).
+      Values can be of any type.
+      To access a property, we can use:
+      The dot notation: obj.property.
+      Square brackets notation obj["property"]. Square brackets allow taking the key from a variable, like obj[varWithKey].
+
+
+      Additional operators:
+      To delete a property: delete obj.prop.
+      To check if a property with the given key exists: "key" in obj.
+      To iterate over an object: for (let key in obj) loop.
+    */
+
+
 
   </script>
 

@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Immutable - Mutable</title>
+</head>
+<body>
+
+  <h3>Immutable - Mutable</h3>
+ 
+
+  <script type="text/javascript">
+    /* immutable = bất biến
+    - can't change origin values when excute a function, side effect.
+    */
+
+    const todos = [1, 2, 3, 4];
+    const products = [
+      {
+        id: 1,
+        title: 'javascript'
+      },
+      {
+        id: 2,
+        title: 'angular'
+      },
+      {
+        id: 3,
+        title: 'react'
+      }
+    ]
+    function filteredTodo() {
+      // todos
+      const clonedTodos = [...todos]; // shallow copy or shallow clone
+      const index = clonedTodos.findIndex(item => item === 2)
+      clonedTodos[index] = 10
+
+      // products
+      const clonedProducts = JSON.parse(JSON.stringify(products)); // deep copy or deep clone
+      const productIndex = clonedProducts.findIndex(item => item.id === 2)
+      clonedProducts[index].title = 'tony';
+
+      return {
+        clonedTodos,
+        clonedProducts
+      }
+    }
+    const { clonedTodos, clonedProducts } = filteredTodo();
+    console.log('todos: ', {
+      clonedTodos, 
+      todos,
+      products,
+      clonedProducts
+    })
+  </script>
+
+</body>
+</html>

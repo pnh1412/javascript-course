@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>compare-object</title>
+</head>
+<body>
+
+  <h3>compare-object</h3>
+ 
+
+  <script type="text/javascript">
+    const hero1 = {
+      name: 'batman',
+      age: 17,
+      author: {
+        country: 'VN',
+        city: 'HCM'
+      } // memoryA
+    }
+    const hero2 = {
+      name: 'batman',
+      age: 17,
+      author: {
+        country: 'VN',
+        city: 'HCM'
+      } // memory ?
+    }
+    console.log('object: ', {
+      hero1,
+      hero2
+    })
+
+    // manual comparison
+    function manualComparison(obj1, obj2) {
+      return obj1.name === obj2.name && obj1.age === obj2.age
+    } 
+    console.log('manual comparison: ', manualComparison(hero1, hero2));
+
+    // shallow equality
+    function shallowEquality(obj1, obj2) {
+      const keys1 = Object.keys(obj1);
+      const keys2 = Object.keys(obj2);
+
+      if(keys1.length !== keys2.length) return false;
+      console.log('keys1: ', keys1)
+
+      for(const key of keys1) {
+        // key: name -> obj1['name'], obj2['name']
+        if(obj1[key] !== obj2[key]) {
+          return false
+        }
+      }
+      return true;
+    }
+
+    console.log('shallowEquality: ', shallowEquality(hero1, hero2));
+
+     // deep equality
+     function deepEquality(obj1, obj2) {
+      const keys1 = Object.keys(obj1);
+      const keys2 = Object.keys(obj2);
+
+      if(keys1.length !== keys2.length) return false;
+
+      for(const key of keys1) {
+        const val1 = obj1[key];
+        const val2 = obj2[key];
+        const areObject = isObject(val1) && isObject(val2)
+        if(areObject && !deepEquality(val1, val2) || !areObject && val1 !== val2) { 
+          return false
+        }
+      }
+
+      return true;
+    }
+
+    function isObject(value) {
+      return value !== null && typeof value === 'object'
+    }
+
+    console.log('deepEquality: ', deepEquality(hero1, hero2));
+  </script>
+
+</body>
+</html>
