@@ -51,7 +51,10 @@
     ]
     // sum of price shopping cart = 37500
     const cart = carts.reduce((acc, curr) => {
-      acc = acc + (curr.quality * curr.price)
+      // loop1: acc = 0 + 500 * 1 = 500
+      // loop2: acc = 500 + 1500 * 20 = 30500
+      // loop3: acc = 30500 + 3 * 35500 = 137000
+      acc =  acc + (curr.price * curr.quality)
       return acc;
     }, 0)
     console.log('cart: ', cart);
@@ -65,10 +68,83 @@
         'Hau': 2
       }
     */
+    const sumNames = names.reduce((acc, curr) => {
+      // acc[curr] = (acc[curr] || 0) + 1;
+      // loop0: acc = {}; -> acc[curr] = acc[curr] -> truong: acc['truong'] || 0 + 1 => { 'truong': 1 }
+      // loop1: acc['tony'] = 0 +   1 => { 'truong': 1, 'tony': 1 }
+      // loop2: acc['hau'] = 0 + 1 => { 'truong': 1, 'tony': 1, 'hau': 1 }
+      // loop3: acc['truong'] = 1 + 1 => { 'truong': 2, 'tony': 0, 'hau': 0 }
+      acc[curr] = (acc[curr] || 0) + 1;
+      return acc;
+    }, {});
+    console.log('sumNames: ', sumNames);
 
-    // hau
+    // group object by a property
+    const peoples = [
+      { name: 'Truong', age: 20 },
+      { name: 'Hau', age: 20 },
+      { name: 'Tony', age: 32 },
+      { name: 'Duy', age: 21 },
+      { name: 'Duy', age: 20 }
+    ]
+    /*
+      output group by age
+      {
+        20: [
+          { name: 'Truong', age: 20 },
+          { name: 'Hau', age: 20 },
+        ],
+        32: [
+          { name: 'Tony', age: 32 },
+        ],
+        21: [
+          { name: 'Duy', age: 21 }
+        ]
+      }
+    */
+   // groyp by dynamic property
+   const groupByProperty = peoples.reduce((acc, curr) => {
+    // { 20: [], 32: [], 21: [] }
+    // loop1: { 20 : []}
+    if(!acc[curr.age]) {
+      acc[curr.age] = []; //  { 20 : []}
+    }
+    acc[curr.age].push(curr); 
+    /*
+      {
+        '20': [
+          { name: 'Truong', age: 20 },
+          { name: 'Hau', age: 20 },
+        ],
+        '32': [
+          { name: 'Tony', age: 32 },
+        ]
+      }
+    */
+    return acc;
+   }, {})
 
-    // tinh
+   console.log('groupByProperty: ', groupByProperty);
+
+   // reduce concat array
+   const friends = [
+    {
+      name: "Anna",
+      books: ["Bible", "Harry Potter"],
+      age: 21,
+    },
+    {
+      name: "Bob",
+      books: ["War and peace", "Romeo and Juliet"],
+      age: 26,
+    },
+    {
+      name: "Alice",
+      books: ["The Lord of the Rings", "The Shining"],
+      age: 18,
+    },
+  ];
+   // ["Bible", "Harry Potter", "War and peace", "Romeo and Juliet", "The Lord of the Rings", "The Shining"]
 
 
 
