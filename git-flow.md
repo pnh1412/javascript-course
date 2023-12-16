@@ -116,6 +116,23 @@ $ git push
 - click "Merge pull request" button
 ```
 
+## Step to step to release to production
+
+```bash
+# 1. create branch releas/x.x.x from main branch
+- before create branch
+$ git pull
+$ git checkout -b release/1.0.2
+
+# 2. merge feature branch into release
+$ git merge feature/a
+$ git merge feature/b
+
+# 3. merge release into main branch
+$ git checkout main
+$ git merge relase /1.0.2
+```
+
 ## How to get latest code into your branch
 
 ```bash```
