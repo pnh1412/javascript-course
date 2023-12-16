@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>web storage</title>
+</head>
+<body>
+
+  <h3>web storage</h3>
+
+  <script type="text/javascript">
+    const todo = {
+      id: 1,
+      title: 'javascript'
+    }
+
+    /* localstorage
+        The localStorage object stores the data with no expiration date. 
+        Storage maximum 5MB.
+        Storaged from client side.
+        Data is json string 
+        The data will be deleted when the user clear  history of browser.
+    */
+    window.sessionStorage.setItem('todo', JSON.stringify(todo));
+
+
+    const getTodoFromStorage = JSON.parse(window.sessionStorage.getItem('todo'));
+    console.log('getTodoFromStorage.title: ',  getTodoFromStorage)
+  
+  </script>
+
+</body>
+</html>

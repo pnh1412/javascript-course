@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>arrow function</title>
+</head>
+<body>
+
+  <h3>arrow function</h3>
+
+  <script type="text/javascript">
+    /*
+      Arrow function doesn’t this.
+      Arrow function to anonymous function
+      Arrow function doesn't has hoisting
+    */
+
+    // doesn't has hoisting
+    // sum()
+    // function sum(){}
+
+    const sum = () => {
+      console.log(123)
+    }
+
+    // this
+    const person = {
+      firstName: 'tony',
+      lastName: 'nguyen',
+      // normal function
+      printName() {
+        console.log('normal function', this)
+      },
+      // arrow function
+      printLastName: () => {
+        console.log('arrow functionn: ', this)
+      }
+    };
+
+    person.printName();
+    person.printLastName();
+
+
+    // long or short
+    // function normalPlusNumber(a, b) {
+    //   return a + b
+    // }
+    // function curryPlusNumber(a) {
+    //   return function(b) {
+    //     return function c() {
+    //       return a + b + c
+    //     }
+    //   }
+    // }
+    const normalPlusNumber = (a, b) => a + b;
+    const curryPlusNumber = a => b => c => (a + b + c);
+
+    // function calcWethear(month) {
+    //   if(month = 1) return 'rain';
+    //   if(month > 2 && month < 11) return 'hot';
+    //   return 'so hot'
+    // }
+    const calcWethear = month => {
+      if(month = 1) return 'rain';
+      if(month > 2 && month < 11) return 'hot';
+      return 'so hot'
+    }
+
+    // specifying parameters
+    // const specifying = () => {  }; // no parameter
+    // const specifying = x => { }; // one parameter
+    const specifying = (x, y, z, a) => {}; // several parameters
+
+    // return object
+    const renderPerson = () => ({ name: 'tony'})
+    console.log('return object: ', renderPerson())
+
+  
+  </script>
+</body>
+</html>

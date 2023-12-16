@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>coericon</title>
+</head>
+<body>
+
+  <h3>json</h3>
+
+  <script type="text/javascript">
+   const friends = [
+    {
+      name: "Anna",
+      books: ["Bible", "Harry Potter"],
+      age: 21,
+    },
+    {
+      name: "Bob",
+      books: ["War and peace", "Romeo and Juliet"],
+      age: 26,
+    },
+    {
+      name: "Alice",
+      books: ["The Lord of the Rings", "The Shining"],
+      age: 18,
+    },
+  ];
+  const todo = {
+    id: 1,
+    title: 'javascript'
+  }
+
+  //  BE require json string array or object
+
+  // using JSON.stringify when FE request body data to BE
+  console.log('friend object: ', friends)
+  const bodyData = JSON.stringify(friends);
+  console.log('bodyData: ', bodyData)
+
+  // using JSON.parse to convert string to valid type javascript  when BE response string json.
+  const dataFromBE = bodyData;
+  const dataParse = JSON.parse(dataFromBE);
+
+  console.log('JSON parse: ', dataParse);
+
+  // shallow clone or deep clone
+  // const dataFriends = [...friends];
+  const dataFriends = JSON.parse(JSON.stringify(friends))
+  dataFriends[1].name = 'truong';
+
+  console.log('before friend: ', friends);
+  console.log('after friends: ', dataFriends);
+
+
+  </script>
+
+</body>
+</html>

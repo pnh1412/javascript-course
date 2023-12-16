@@ -103,28 +103,33 @@
       }
     */
    // groyp by dynamic property
-   const groupByProperty = peoples.reduce((acc, curr) => {
-    // { 20: [], 32: [], 21: [] }
-    // loop1: { 20 : []}
-    if(!acc[curr.age]) {
-      acc[curr.age] = []; //  { 20 : []}
-    }
-    acc[curr.age].push(curr); 
-    /*
-      {
-        '20': [
-          { name: 'Truong', age: 20 },
-          { name: 'Hau', age: 20 },
-        ],
-        '32': [
-          { name: 'Tony', age: 32 },
-        ]
+   function groupByProperty(property) {
+    const res = peoples.reduce((acc, curr) => {
+      // { 20: [], 32: [], 21: [] }
+      // loop1: { 20 : []};
+      const key = curr[property]; // key = curr['name'] = 'truong'
+      if(!acc[key]) {
+        acc[key] = []; //  { 'truong' : []}
       }
-    */
-    return acc;
-   }, {})
+      acc[key].push(curr); 
+      /*
+        {
+          '20': [
+            { name: 'Truong', age: 20 },
+            { name: 'Hau', age: 20 },
+          ],
+          '32': [
+            { name: 'Tony', age: 32 },
+          ]
+        }
+      */
+      return acc;
+    }, {})
 
-   console.log('groupByProperty: ', groupByProperty);
+    return res;
+   }
+   const resultByGroup = groupByProperty('name');
+   console.log('resultByGroup: ', resultByGroup);
 
    // reduce concat array
    const friends = [
@@ -145,6 +150,11 @@
     },
   ];
    // ["Bible", "Harry Potter", "War and peace", "Romeo and Juliet", "The Lord of the Rings", "The Shining"]
+   const restConcat = friends.reduce((acc, curr) => {
+    acc = acc.concat(curr.books)
+    return acc;
+   }, [])
+   console.log('restConcat: ', restConcat);
 
 
 

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>destructuring</title>
+</head>
+<body>
+
+  <h3>destructuring</h3>
+
+  <div id="todo"></div>
+
+  <script type="text/javascript">
+    // destructuring object
+    const todo = {
+      id: 1,
+      title: 'javascript',
+      country: {
+        name: 'VN', 
+        district: {
+          name: 'phu nhuan',
+          ward: 14
+        }
+      },
+      brand: {
+        name: 'bmw',
+        quality: 1
+      }
+    }
+    // const id = todo.id;
+    const title = 'tony';
+    // const country = todo.country.name
+    const { 
+      id, 
+      title: todoTitle, // rename value
+      country,
+      country: { 
+        name 
+      } 
+    } = todo;
+    
+    console.log('destructuring object: ', {
+      country, name, todoTitle
+    });
+
+    // default valuue
+    function renderTodo({ title = 'Default Todo', country: { district: { name } }}) {
+      const todo = document.getElementById('todo');
+      todo.innerHTML += `
+        Title: ${title}; District Name: ${name}
+      `
+    }
+    renderTodo({
+      country: {
+        district: {
+          name: 'tony'
+        }
+      }
+    }); 
+
+    // delete propery object
+    // const clonedTodo =  JSON.parse(JSON.stringify(todo));
+    // delete clonedTodo.country;
+    const { country: clonedCountry, ...rest } = todo; // rest operator
+
+    console.log('delete property object: ', rest);
+
+
+    // array destructuring
+    const numbers = [
+      { title: 'javasccript'},
+      { title: 'vue'},
+      { title: 'react'}
+    ];
+    const [_, __, todo3] = numbers;
+    console.log('array descturing: ', todo3)
+
+  
+  </script>
+</body>
+</html>
