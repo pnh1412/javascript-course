@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>arrow function</title>
+</head>
+<body>
+
+  <h3>promise</h3>
+  <div id="todos"></div>
+
+  <script type="text/javascript">
+    let todos = [];
+
+    // 5s
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=5&_page=1', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      todos = data;
+      renderTodos(todos);
+    })
+
+    function renderTodos(dataSource) {
+      let html = '';
+      dataSource.forEach(item => {
+        html += `<div>${item.title}</div>`
+      })
+      document.getElementById('todos').innerHTML = html;
+    }
+
+    /*
+      Promises are an alternative callbacks function for delivering the results of an asynchronous function.
+      A Promise is always in one of three mutually exclusive states:
+        Before the result is ready, the Promise is pending.
+        If a result is available, the Promise is fulfilled.
+        If an error happened, the Promise is rejected.
+    */
+
+    const allowCallAPI = false;
+    const p1 = new Promise((resolve, reject) => {
+      if(allowCallAPI) {
+        resolve('call api success')
+      } else {
+        reject('call api fail')
+      }
+    });
+
+    // how to get value from promise. Please using .then()
+    p1.then(res =>{
+      console.log('res: ', res)
+    }).catch(err => {
+      console.log('err: ', err)
+    })
+
+    // chain promise
+    const chainPromise = Promise.resolve(1)
+    chainPromise.then(data => data * 2)
+      .then(data => data * 2)
+      .then(data => data * 2)
+      .then(data => data * 2)
+      .then(data => data * 2)
+      .then(data => console.log('result chain promise: ', data))
+
+    // console.log('p1: ', p1)
+
+
+  </script>
+</body>
+</html>
