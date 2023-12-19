@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>stack queue </title>
+</head>
+<body>
+
+  <h3>stack queue </h3>
+
+  <script type="text/javascript">
+    /* 
+      stack: A stack is an ordered collection of items that follows the LIFO (Last In First Out). (chồng sách).
+      queue: A queue is an ordered collection of items that follows the FIFO (First In First Out). (xếp hàng mua vé).
+    */
+    const dataStack = [];
+    // add item to stack
+    dataStack.push(1);
+    dataStack.push(2);
+    dataStack.push(3);
+    // remove item from queue
+    dataStack.pop();
+
+    const dataQueue = [];
+   // add item to queue
+    dataQueue.unshift(1);
+    dataQueue.unshift(2);
+    dataQueue.unshift(3);
+    // remove item from stack
+    dataQueue.shift();
+
+    console.log('dataStack: ', dataStack);
+    console.log('dataQueue: ', dataQueue);
+
+  </script>
+
+</body>
+</html>
