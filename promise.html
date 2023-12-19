@@ -6,6 +6,7 @@
 <body>
 
   <h3>promise</h3>
+  <button id='btnAdd'>Add Todo</button>
   <div id="todos"></div>
 
   <script type="text/javascript">
@@ -20,17 +21,11 @@
     })
     .then(res => res.json())
     .then(data => {
-      todos = data;
-      renderTodos(todos);
+      console.log('demo promise: ', data)
+      // renderTodos(todos);
     })
 
-    function renderTodos(dataSource) {
-      let html = '';
-      dataSource.forEach(item => {
-        html += `<div>${item.title}</div>`
-      })
-      document.getElementById('todos').innerHTML = html;
-    }
+  
 
     /*
       Promises are an alternative callbacks function for delivering the results of an asynchronous function.
@@ -66,6 +61,69 @@
       .then(data => console.log('result chain promise: ', data))
 
     // console.log('p1: ', p1)
+
+    // fetch list todo
+    const fetchTodo = fetch('https://tony-auth-express.vercel.app/api/todo', {
+      method: 'GET',
+    })
+
+    fetchTodo
+      .then(res => res.json())
+      .then(data => {
+        todos = data.data;
+        console.log('todos: ', todos)
+        renderTodos(todos);
+      })
+
+    function renderTodos(dataSource) {
+      let html = '';
+      dataSource.forEach(item => {
+        html += `
+          <div>${item.title}</div>
+          <button id="btnDelete" onclick="deleteItem('${item._id}')">Delete</button>
+        `
+      })
+      document.getElementById('todos').innerHTML = html;
+    }
+
+    document.getElementById('btnAdd').addEventListener('click', function() {
+      const payload = {
+        data: { 
+          title: `Todo ${Math.floor(Math.random() * 1000)}`,
+          status: 'new',
+          severity: 'low',
+          description: `Description ${Math.floor(Math.random() * 1000)}`,
+          date: new Date().toDateString()
+        }
+      }
+      fetch('https://tony-auth-express.vercel.app/api/todo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(data => {
+        const items = [...todos, data.data]; // push item in array
+        todos = items;
+        renderTodos(todos)
+      })
+    })
+
+    function deleteItem(todoId) {
+      fetch(`https://tony-auth-express.vercel.app/api/todo/${todoId}`, {
+        method: 'DELETE'
+      })
+      .then(res => res.json())
+      .then(data => {
+        const items = [...todos].filter(todo => todo._id !== todoId);
+        todos = items;
+        renderTodos(todos)
+      })
+    }
+   
+
 
 
   </script>
