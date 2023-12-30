@@ -63,69 +63,130 @@
     // console.log('p1: ', p1)
 
     // fetch list todo
-    const fetchTodo = fetch('https://tony-auth-express.vercel.app/api/todo', {
-      method: 'GET',
+    // const fetchTodo = fetch('https://tony-auth-express.vercel.app/api/todo', {
+    //   method: 'GET',
+    // })
+
+    // fetchTodo
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     todos = data.data;
+    //     console.log('todos: ', todos)
+    //     renderTodos(todos);
+    //   })
+
+    // function renderTodos(dataSource) {
+    //   let html = '';
+    //   dataSource.forEach(item => {
+    //     html += `
+    //       <div>${item.title}</div>
+    //       <button id="btnDelete" onclick="deleteItem('${item._id}')">Delete</button>
+    //     `
+    //   })
+    //   document.getElementById('todos').innerHTML = html;
+    // }
+
+    // document.getElementById('btnAdd').addEventListener('click', function() {
+    //   const payload = {
+    //     data: { 
+    //       title: `Todo ${Math.floor(Math.random() * 1000)}`,
+    //       status: 'new',
+    //       severity: 'low',
+    //       description: `Description ${Math.floor(Math.random() * 1000)}`,
+    //       date: new Date().toDateString()
+    //     }
+    //   }
+    //   fetch('https://tony-auth-express.vercel.app/api/todo', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(payload)
+    //   })
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     const items = [...todos, data.data]; // push item in array
+    //     todos = items;
+    //     renderTodos(todos)
+    //   })
+    // })
+
+    // function deleteItem(todoId) {
+    //   fetch(`https://tony-auth-express.vercel.app/api/todo/${todoId}`, {
+    //     method: 'DELETE'
+    //   })
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     const items = [...todos].filter(todo => todo._id !== todoId);
+    //     todos = items;
+    //     renderTodos(todos)
+    //   })
+    // }
+
+    // Promise all
+    function fetchApi(url) {
+      return fetch(url, {
+              method: 'GET' 
+              })
+              .then(res => res.json())
+              .then(data => data)
+    }
+    const userP = fetchApi('https://jsonplaceholder.typicode.com/users')
+    const postP = fetchApi('https://jsonplaceholder.typicode.com/posts?_limit=10&_page=1')
+
+    // promise hell
+    userP.then(user => {
+      postP.then(post => {
+        const data = user.map(user => {
+          const postItem = post.find(item => item.id === user.id);
+          return {
+            email: user.email,
+            title: postItem.title,
+          }
+        })
+        console.log("fetch sequence: ", data);
+      })
     })
 
-    fetchTodo
-      .then(res => res.json())
+    Promise.all([postP, userP])
       .then(data => {
-        todos = data.data;
-        console.log('todos: ', todos)
-        renderTodos(todos);
+        console.log("fetch all", data);
+      })  
+      .catch(err => {
+        console.log("fetch all error", err)
       })
 
-    function renderTodos(dataSource) {
-      let html = '';
-      dataSource.forEach(item => {
-        html += `
-          <div>${item.title}</div>
-          <button id="btnDelete" onclick="deleteItem('${item._id}')">Delete</button>
-        `
-      })
-      document.getElementById('todos').innerHTML = html;
-    }
 
-    document.getElementById('btnAdd').addEventListener('click', function() {
-      const payload = {
-        data: { 
-          title: `Todo ${Math.floor(Math.random() * 1000)}`,
-          status: 'new',
-          severity: 'low',
-          description: `Description ${Math.floor(Math.random() * 1000)}`,
-          date: new Date().toDateString()
+    // async / await
+    async function checkPromise() {
+      const user = await userP;
+      const post = await postP;
+
+      const data = user.map(user => {
+        // id: 3
+        const postItem = post.find(item => item.id === user.id);
+        return {
+          email: user.email,
+          title: postItem.title,
         }
-      }
-      fetch('https://tony-auth-express.vercel.app/api/todo', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
       })
-      .then(res => res.json())
-      .then(data => {
-        const items = [...todos, data.data]; // push item in array
-        todos = items;
-        renderTodos(todos)
-      })
-    })
-
-    function deleteItem(todoId) {
-      fetch(`https://tony-auth-express.vercel.app/api/todo/${todoId}`, {
-        method: 'DELETE'
-      })
-      .then(res => res.json())
-      .then(data => {
-        const items = [...todos].filter(todo => todo._id !== todoId);
-        todos = items;
-        renderTodos(todos)
-      })
+      console.log("async await: ", data);
     }
-   
+    checkPromise();
 
-
+    async function AsyncAll() {
+      try {
+        const res = await Promise.all([postP, userP])
+        return res;
+      } catch(err) {
+        console.log('AsyncAll error: ', err)
+      }
+    }
+    AsyncAll().then(data => console.log('AsyncAll: ', data));
 
   </script>
 </body>
 </html>
+
+
+/* [{   title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderi", email: "Sincere@april.biz"}]

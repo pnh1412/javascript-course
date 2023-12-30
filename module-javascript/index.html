@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>module js</title>
+</head>
+<body>
+
+  <h3>module js</h3>
+
+  <script type="module">
+    // import alias "as" sayHi as sayHiCommon 
+    import getFullName, { getSocialNetworks, CONFIG, todos, sayHi as sayHiCommon } from './js/common.js';
+    import * as facebook from './js/facebook.js'; // import *
+
+    const social = getSocialNetworks('facebook');
+
+    sayHiCommon();
+
+    console.log('index.html: ', {
+      CONFIG,
+      todos,
+      fullName: getFullName('tony',' nguyen'),
+      sayHiFadebook: facebook.sayHi()
+    })
+  
+  </script>
+</body>
+</html>
