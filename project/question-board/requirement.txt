@@ -1,0 +1,9 @@
+Requirements
+-----------------------
+Build a question board that displays the list question that group by categories.
+- Show questions by categories. Get data from dataQuestions.js
+- Show submissions question status: correct, incorrect, partially correct. Get data from dataSubmissions.js
+  - None answer: gray
+  - Correct answer: green
+  - Incorrect answer: red
+  - Partially correct answer: yellow
