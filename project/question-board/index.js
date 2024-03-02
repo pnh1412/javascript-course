@@ -20,7 +20,7 @@ async function fetchSubmissions() {
 // element dom
 const questionBoard = document.getElementById('question_board');
 
-function renderQuestionBoard(questions) {
+function renderQuestionBoard(questions, submissions) {
   Object.keys(questions).forEach(key => {
     const category = questions[key];
 
@@ -35,11 +35,24 @@ function renderQuestionBoard(questions) {
     divBoards.setAttribute('class', 'boards');
 
     category.forEach(item => {
+      const submissionItem = submissions.find(submission => submission.questionId === item.id);
+      const status = submissionItem?.status;
+      // let classStatus = 'question__status--none';
+      // if(status === 'CORRECT') {
+      //   classStatus = 'question__status--correct';
+      // }
+      // if(status === 'INCORRECT') {
+      //   classStatus = 'question__status--incorrect';
+      // }
+      // if(status === 'PARTIALLY_CORRECT') {
+      //   classStatus = 'question__status--partially_correct';
+      // }
+
       const divQuestion = document.createElement('div');
       divQuestion.setAttribute('class', 'question');
 
       const divStatus = document.createElement('div');
-      divStatus.setAttribute('class', 'question__status question__status--none');
+      divStatus.setAttribute('class', `question__status question__status--${status ? status.toLowerCase() : 'none'}`);
 
       const divStatusTitle = document.createElement('h2');
       divStatusTitle.setAttribute('class', 'question__title');
@@ -69,23 +82,13 @@ async function loadHTML() {
     acc[currItem.category].push(currItem);
     return acc;
   }, {})
-  renderQuestionBoard(categories);
+
+  const submissions = await fetchSubmissions();
+  console.log('submissions', {
+    submissions,
+    categories
+  });
+  renderQuestionBoard(categories, submissions);
 }
 
 loadHTML();
-
-
-
-
-// test data
-async function testData() {
-  const questionBoard = await fetchQuestions();
-  const submissions = await fetchSubmissions();
- 
-  
-  console.log('testData: ', {
-    questionBoard,
-    submissions
-  })
-}
-testData();
